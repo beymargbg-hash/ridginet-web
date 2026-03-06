@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridginet - Conectividad Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --main-bg: #050a14; --glass: rgba(255, 255, 255, 0.03); --accent: #007bff; --text: #e0e0e0; --white: #fff; }
+        body { font-family: 'Poppins', sans-serif; background: var(--main-bg); color: var(--text); margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: radial-gradient(circle at top right, #001f3f, transparent), radial-gradient(circle at bottom left, #000, transparent); z-index: -2; }
+        
+        #speed-animation { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; position: relative; }
+        .logo-box { width: 180px; height: 180px; background: white; border-radius: 50%; padding: 15px; margin-bottom: 25px; 
+            box-shadow: 0 0 40px rgba(0, 123, 255, 0.5); }
+        .logo-box img { width: 100%; border-radius: 50%; }
+
+        h1 { font-size: 3.8rem; margin: 0; background: linear-gradient(to right, #fff, #007bff, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; }
+        h3 { font-size: 1.5rem; margin-top: 5px; color: var(--white); font-weight: 300; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin-bottom: 35px; color: #a0a0a0; line-height: 1.6; }
+        
+        .contact-bar { display: flex; gap: 30px; margin-top: 50px; flex-wrap: wrap; justify-content: center; }
+        .contact-link { color: #fff; font-size: 1.3rem; transition: 0.3s; text-decoration: none; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 30px; background: rgba(255,255,255,0.05); }
+        .contact-link:hover { color: var(--accent); background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+
+        .plans-section { padding: 80px 20px; text-align: center; }
+        .section-title { font-size: 2.8rem; color: #fff; margin-bottom: 60px; }
+        .showcase { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+        
+        .plan-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); 
+            padding: 50px 35px; border-radius: 25px; width: 300px; text-align: center; transition: 0.5s; position: relative; }
+        .plan-card:hover { transform: translateY(-15px); border-color: var(--accent); box-shadow: 0 10px 40px rgba(0, 123, 255, 0.2); }
+        
+        .plan-card h3 { color: var(--accent); font-size: 2rem; margin-bottom: 10px; }
+        .plan-description { font-size: 0.95rem; color: #a0a0a0; margin-bottom: 30px; min-height: 60px; line-height: 1.4; }
+        .price { font-size: 3rem; font-weight: bold; margin: 25px 0; color: #fff; }
+        .price span { font-size: 1.2rem; color: #a0a0a0; font-weight: 400; }
+        
+        .plan-features { list-style: none; padding: 0; margin: 30px 0; text-align: left; color: #e0e0e0; }
+        .plan-features li { margin-bottom: 15px; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+        .plan-features li i { color: var(--accent); }
+
+        .btn-cta { background: linear-gradient(45deg, var(--accent), #00d2ff); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; 
+            font-weight: bold; width: 100%; display: block; box-sizing: border-box; transition: 0.4s; }
+        .btn-cta:hover { transform: scale(1.02); filter: brightness(1.1); }
+
+        .featured-plan { border: 2px solid var(--accent); background: rgba(0, 123, 255, 0.05); }
+        .featured-tag { position: absolute; top: 15px; right: 15px; background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <canvas id="speed-animation"></canvas>
+
+    <section class="hero">
+        <div class="logo-box">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Ridginet Logo">
+        </div>
+        <h1>RIDGINET</h1>
+        <h3>MULTISERVICIOS MORALES</h3>
+        <p>Experimenta la verdadera potencia de la fibra óptica. Conectamos tu hogar o empresa con tecnología MikroTik de última generación, garantizando estabilidad total y soporte técnico especializado.</p>
+        
+        <div class="contact-bar">
+            <a href="https://wa.me/50374500751" target="_blank" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp Directo</a>
+            <a href="mailto:Ridgenetisp@gmail.com" class="contact-link"><i class="far fa-envelope"></i> Ridgenetisp@gmail.com</a>
+        </div>
+    </section>
+
+    <section class="plans-section">
+        <h2 class="section-title">Nuestros Planes Premium</h2>
+        
+        <div class="showcase">
+            <div class="plan-card">
+                <h3>Plan Hogar</h3>
+                <p class="plan-description">Conectividad ideal para familias que buscan navegar, ver series y estudiar sin preocupaciones.</p>
+                <div class="price">$15.000<span>/mes</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> Navegación Fluida 24/7</li>
+                    <li><i class="fas fa-check-circle"></i> Redes Sociales y Streaming</li>
+                    <li><i class="fas fa-check-circle"></i> Soporte Técnico Estándar</li>
+                </ul>
+                <a href="https://wa.me/50374500751?text=Hola, me interesa el Plan Hogar" class="btn-cta">Contratar Ahora</a>
+            </div>
+
+            <div class="plan-card featured-plan">
+                <span class="featured-tag">EL MÁS POPULAR</span>
+                <h3>Plan Gamer</h3>
+                <p class="plan-description">Diseñado para entusiastas. Latencia ultra-baja y ancho de banda optimizado para juegos online y 4K.</p>
+                <div class="price">$25.000<span>/mes</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-bolt"></i> Prioridad Alta de Datos</li>
+                    <li><i class="fas fa-bolt"></i> Ping Optimizado (Sin Lag)</li>
+                    <li><i class="fas fa-bolt"></i> Streaming en Alta Definición</li>
+                </ul>
+                <a href="https://wa.me/50374500751?text=Hola, me interesa el Plan Gamer" class="btn-cta">Contratar Ahora</a>
+            </div>
+
+            <div class="plan-card">
+                <h3>Plan Empresa</h3>
+                <p class="plan-description">Solución robusta para negocios que requieren disponibilidad total y múltiples dispositivos conectados.</p>
+                <div class="price">$45.000<span>/mes</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-briefcase"></i> Banda Ancha Dedicada</li>
+                    <li><i class="fas fa-briefcase"></i> Conexión Multi-Usuario</li>
+                    <li><i class="fas fa-briefcase"></i> Soporte VIP Preferencial</li>
+                </ul>
+                <a href="https://wa.me/50374500751?text=Hola, me interesa el Plan Empresa" class="btn-cta">Consultar Plan</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const canvas = document.getElementById('speed-animation');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let dots = [];
+        class Dot {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.size = Math.random() * 2;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        function init() { dots = []; for (let i = 0; i < 120; i++) dots.push(new Dot()); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); dots.forEach(dot => { dot.update(); dot.draw(); }); requestAnimationFrame(animate); }
+        init(); animate();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+    </script>
+</body>
+</html>
